@@ -47,6 +47,9 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -57,6 +60,14 @@ group :development do
   # gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem 'rubocop'
+  gem "spring"
+  gem 'spring-commands-rspec'
+  gem 'spring-commands-rubocop'
+  gem "guard-rspec", require: false
+  gem 'pry-rails'
+  gem 'annotate'
+  gem 'guard-livereload', require: false
+  gem 'rack-livereload'
 end
 
