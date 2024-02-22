@@ -1,0 +1,24 @@
+<h1>病名リスト</h1>
+<div id="diagnosis">
+  <% @diagnoses.each do |diagnosis| %>
+    <p>
+      <strong>UID:</strong>
+      <%= diagnosis.id %>
+    </p>
+    <p>
+      <strong>病名:</strong>
+      <%= diagnosis.name_value %>(<%= diagnosis.name_terminology %>: <%= diagnosis.name_code %>)
+    <p>
+    <p>
+      <strong>発症日:</strong>
+      <%= diagnosis.onset %>
+    </p>
+    <p>
+      <strong>確度：</strong>
+      <%= diagnosis.diagnostic_certainty %>
+    </p>
+    <p>
+      <%= link_to '詳細', diagnosis_path(diagnosis.id) %>
+    </p>
+  <% end %>
+</div>

@@ -1,0 +1,16 @@
+{
+    "problemlist/category|code": "433",
+    "problemlist/category|terminology": "openehr",
+    "problemlist/category|value": "event",
+    "problemlist/problem_diagnosis/problem_diagnosis_name|terminology": "ICD-10",
+    "problemlist/problem_diagnosis/problem_diagnosis_name|code": "E790-.003",
+    "problemlist/problem_diagnosis/problem_diagnosis_name|value": "高尿酸血症",
+    "problemlist/problem_diagnosis/date_time_of_onset": "2002-01-25",
+    "problemlist/problem_diagnosis/date_time_clinically_recognised": "2022-01-25",
+    "problemlist/problem_diagnosis/diagnostic_certainty|terminology": "local",
+    "problemlist/problem_diagnosis/diagnostic_certainty|value": "Confirmed",
+    "problemlist/problem_diagnosis/diagnostic_certainty|code": "at0076",
+    "problemlist/territory|terminology": "ISO_3166-1",
+    "problemlist/territory|code": "JP",
+    "problemlist/composer|name": "Shinji KOBAYASHI"
+}

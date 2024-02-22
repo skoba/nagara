@@ -1,0 +1,35 @@
+{
+    "resourceType": "Condition",
+    "id": "jp-condition-example-1",
+    "meta": {
+      "profile": [
+        "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Condition"
+      ]
+    },
+    "verificationStatus": {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "code": "confirmed"
+        }
+      ]
+    },
+    "code": {
+        "coding": [
+            {
+                "system": "urn:oid:2.16.840.1.113883.6.3",
+                "code": "E790-.003"
+            }
+        ],
+      "text": "高尿酸血症"
+    },
+    "subject": {
+      "reference": "ehr_id:b3a123d3-86a9-46a9-a8b9-6ac9289abe97"
+    },
+    "onsetDateTime": {
+      "value": "2002-01-25"
+    },
+    "recordedDate": {
+        "value": "2002-01-25"
+    }
+}

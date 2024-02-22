@@ -1,0 +1,20 @@
+<h1>病名</h1>
+<p>
+  <strong>UID:</strong>
+  <%= @diagnosis.id %>
+</p>
+<p>
+  <strong>病名:</strong>
+  <%= @diagnosis.name_value %>(<%= @diagnosis.name_terminology %>: <%= @diagnosis.name_code %>)
+<p>
+<p>
+  <strong>発症日:</strong>
+  <%= @diagnosis.onset %>
+</p>
+<p>
+  <strong>確度：</strong>
+  <%= @diagnosis.diagnostic_certainty %>
+</p>
+<p>
+ <%= link_to '一覧', diagnosis_index_path %>
+</p>
