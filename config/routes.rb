@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources 'diagnosis'
+  resources 'diagnoses'
+  resources 'laboratory_test_results'
   #get 'diagnosis/index'
   #get 'diagnosis/show'
 
