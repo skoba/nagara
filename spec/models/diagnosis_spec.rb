@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Diagnosis do
   let(:diagnosis) { build :diagnosis }
   let(:flat_json) { FLAT_JSON }
@@ -15,7 +13,6 @@ RSpec.describe Diagnosis do
     it 'create FLAT JSON format that equals to flat_json sample' do
       expect(JSON.parse(diagnosis.flat_json)).to eq JSON.parse(flat_json)
     end
-    
     
     it 'saves successfully' do
       expect(diagnosis.save).to be_truthy
