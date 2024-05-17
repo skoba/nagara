@@ -107,6 +107,8 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    factory_trace (1.1.1)
+      factory_bot (>= 4.0)
     ffi (1.16.3)
     formatador (1.1.0)
     globalid (1.2.1)
@@ -353,6 +355,7 @@ DEPENDENCIES
   bootsnap
   debug
   factory_bot_rails
+  factory_trace
   guard-livereload
   guard-rails
   guard-rspec
@@ -378,7 +381,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.3.0p0
+   ruby 3.3.1p55
 
 BUNDLED WITH
    2.5.5

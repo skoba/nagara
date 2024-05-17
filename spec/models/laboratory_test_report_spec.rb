@@ -1,6 +1,12 @@
-RSpec.describe LaboratoryTestResult do
+RSpec.describe LaboratoryTestReport do
+  let(:laboratory_test_report) { build :laboratory_test_report }
   let(:fhir_json) { FHIR_JSON }
 
+  describe 'Sample instance generation' do
+    example 'generate from factory_bot' do
+      expect(laboratory_test_report.test_name).to eq '生化学検査'  
+    end
+  end
   
 end
 FHIR_JSON = <<JSON
@@ -564,4 +570,4 @@ MML = <<XML
       </mmlLb:item>
     </mmlLb:laboTest>
 </mmlLb:TestModule>
-<<XML
+XML
