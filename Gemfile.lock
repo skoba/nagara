@@ -397,6 +397,7 @@ DEPENDENCIES
   rubocop-factory_bot
   rubocop-inflector
   rubocop-rails
+  rubocop-rspec
   rubocop-rspec_rails
   spring
   spring-commands-rspec
