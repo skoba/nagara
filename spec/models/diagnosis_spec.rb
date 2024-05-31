@@ -9,11 +9,13 @@ RSpec.describe Diagnosis do
     end
   end
 
-  describe 'registration to EHRbase' do
+  describe 'parser' do
     it 'create FLAT JSON format that equals to flat_json sample' do
       expect(JSON.parse(diagnosis.flat_json)).to eq JSON.parse(flat_json)
     end
+  end
 
+  describe 'registration to EHRbase' do
     it 'saves successfully' do
       expect(diagnosis.save).to be_truthy
     end

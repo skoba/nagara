@@ -68,9 +68,9 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem 'guard-rspec', require: false
   gem 'rubocop'
-  gem 'rubocop-factory_bot'
-  gem 'rubocop-inflector'
-  gem 'rubocop-rails'
+  gem 'rubocop-factory_bot', require: false
+  gem 'rubocop-inflector', require: false
+  gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'rubocop-rspec_rails', require: false
   gem 'spring'
