@@ -1,15 +1,16 @@
 RSpec.describe LaboratoryTestReport do
   let(:laboratory_test_report) { build :laboratory_test_report }
-  let(:fhir_json) { FHIR_JSON }
+  let(:fhir_json) { LabratoryTestReport.from_fhir_json(FHIR_JSON) }
 
   describe 'Sample instance generation' do
     it 'generates a valid instance from factory_bot' do
       expect(laboratory_test_report).to be_valid
     end
+  end
 
-    xit 'generete from FHIR JSON' do
-      laboratory_test_report_from_fhir = d
-      expect(fhir_json).to eq 
+  describe 'parser' do
+    it 'parse FLAT JSON of openEHR' do
+      expect(fhir_json).to eq laboratory_test_report
     end
   end
 

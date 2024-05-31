@@ -184,7 +184,7 @@ class Diagnosis
       certainty = mml.xpath("//mmlRd:categories/mmlRd:category[@mmlRd:tableId='MML0015']")
       diagnostic_certainty = ''
       diagnostic_certainty_code = ''
-      unless certainty.blank?
+      if certainty.present?
         diagnostic_certainty_terminology = 'local'
         if certainty.text == 'confirmedDiagnosis'
           diagnostic_certainty = 'Confirmed'

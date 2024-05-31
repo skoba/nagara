@@ -55,6 +55,9 @@ group :development, :test do
   gem 'factory_trace'
   gem 'pry-byebug'
   gem 'rspec-rails'
+  gem 'rubocop-rspec', require: false
+  gem 'rubocop-rspec_rails', require: false
+  gem 'spring-commands-rspec'
 end
 
 group :development do
@@ -71,10 +74,8 @@ group :development do
   gem 'rubocop-factory_bot', require: false
   gem 'rubocop-inflector', require: false
   gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
-  gem 'rubocop-rspec_rails', require: false
+
   gem 'spring'
-  gem 'spring-commands-rspec'
   gem 'spring-commands-rubocop'
 
   gem 'guard-livereload', require: false
