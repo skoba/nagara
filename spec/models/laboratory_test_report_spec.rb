@@ -1,6 +1,6 @@
 RSpec.describe LaboratoryTestReport do
   let(:laboratory_test_report) { build :laboratory_test_report }
-  let(:fhir_json) { LabratoryTestReport.from_fhir_json(FHIR_JSON) }
+  let(:fhir_json) { FHIR_JSON }
 
   describe 'Sample instance generation' do
     it 'generates a valid instance from factory_bot' do
@@ -9,115 +9,143 @@ RSpec.describe LaboratoryTestReport do
   end
 
   describe 'parser' do
+    it 'parse HL7 FHIR json' do
+      expect(LaboratoryTestReport.from_fhir_json(FHIR_JSON).test_name).to eq '生化学検査'
+    end
+
     it 'parse FLAT JSON of openEHR' do
-      expect(fhir_json).to eq laboratory_test_report
+      expect(LaboratoryTestReport.from_flat_json(FLAT_JSON).test_name).to eq '生化学検査'
     end
   end
 
 end
+
 FHIR_JSON = <<~JSON
 {
-  "resourceType" : "Observation",
-  "id" : "jp-observation-labresult-example-1",
-  "meta" : {
-    "profile" : ["http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"]
+  "resourceType": "Observation",
+  "id": "jp-observation-labresult-example-1",
+  "meta": {
+    "profile": [
+      "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
+    ]
   },
-
-  "text" : {
-    "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Observation</b><a name=\"jp-observation-labresult-example-1\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Observation &quot;jp-observation-labresult-example-1&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-jp-observation-labresult.html\">JP Core Observation LabResult Profile</a></p></div><p><b>basedOn</b>: <a name=\"jp-servicerequest-example-1\"> </a></p><blockquote><p/><p><a name=\"jp-servicerequest-example-1\"> </a></p><p><b>status</b>: active</p><p><b>intent</b>: original-order</p><p><b>code</b>: 生化学検査 <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (localcode#12345678)</span></p><p><b>subject</b>: <a href=\"Patient-jp-patient-example-1.html\">Patient/jp-patient-example-1</a> &quot; 山田&quot;</p><p><b>encounter</b>: <a href=\"Encounter-jp-encounter-example-1.html\">Encounter/jp-encounter-example-1</a></p><p><b>occurrence</b>: 2021-10-19 01:15:00+0900</p><p><b>requester</b>: <a href=\"Practitioner-jp-practitioner-example-female-1.html\">Practitioner/jp-practitioner-example-female-1</a> &quot; 東京&quot;</p><p><b>performer</b>: <a href=\"Practitioner-jp-practitioner-example-male-2.html\">Practitioner/jp-practitioner-example-male-2</a> &quot; 愛知&quot;</p></blockquote><p><b>status</b>: final</p><p><b>category</b>: Laboratory <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-jp-simpleobservationcategory-cs.html\">JP Core Simple Observation Category CodeSystem</a>#laboratory)</span></p><p><b>code</b>: 尿酸 <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (localcode#05104; <a href=\"https://simplifier.net/resolve?scope=jpfhir-terminology@1.1.1&amp;canonical=urn:oid:1.2.392.200119.4.504\">JP Core Observation LabResult Code CodeSystem</a>#3C020000002327101)</span></p><p><b>subject</b>: <a href=\"Patient-jp-patient-example-1.html\">Patient/jp-patient-example-1</a> &quot; 山田&quot;</p><p><b>effective</b>: 2021-10-19 02:20:00+0900</p><p><b>performer</b>: <a href=\"Practitioner-jp-practitioner-example-female-1.html\">Practitioner/jp-practitioner-example-female-1</a> &quot; 東京&quot;</p><p><b>value</b>: 8.5 mg/dL</p><p><b>interpretation</b>: H <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.3.0/CodeSystem-v3-ObservationInterpretation.html\">ObservationInterpretation</a>#H &quot;High&quot;)</span></p><p><b>specimen</b>: <a href=\"Specimen-jp-specimen-example-1.html\">Specimen/jp-specimen-example-1</a></p><h3>ReferenceRanges</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Low</b></td><td><b>High</b></td><td><b>Type</b></td></tr><tr><td style=\"display: none\">*</td><td>2.1</td><td>7</td><td>Normal Range <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.3.0/CodeSystem-referencerange-meaning.html\">Observation Reference Range Meaning Codes</a>#normal)</span></td></tr></table><hr/><blockquote><p><b>Generated Narrative: ServiceRequest #jp-servicerequest-example-1</b><a name=\"jp-servicerequest-example-1\"> </a></p><p><b>status</b>: active</p><p><b>intent</b>: original-order</p><p><b>code</b>: 生化学検査 <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (localcode#12345678)</span></p><p><b>subject</b>: <a href=\"Patient-jp-patient-example-1.html\">Patient/jp-patient-example-1</a> &quot; 山田&quot;</p><p><b>encounter</b>: <a href=\"Encounter-jp-encounter-example-1.html\">Encounter/jp-encounter-example-1</a></p><p><b>occurrence</b>: 2021-10-19 01:15:00+0900</p><p><b>requester</b>: <a href=\"Practitioner-jp-practitioner-example-female-1.html\">Practitioner/jp-practitioner-example-female-1</a> &quot; 東京&quot;</p><p><b>performer</b>: <a href=\"Practitioner-jp-practitioner-example-male-2.html\">Practitioner/jp-practitioner-example-male-2</a> &quot; 愛知&quot;</p></blockquote></div>"
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative: Observation</b><a name=\\"jp-observation-labresult-example-1\\"> </a></p><div style=\\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\\"><p style=\\"margin-bottom: 0px\\">Resource Observation &quot;jp-observation-labresult-example-1&quot; </p><p style=\\"margin-bottom: 0px\\">Profile: <a href=\\"StructureDefinition-jp-observation-labresult.html\\">JP Core Observation LabResult Profile</a></p></div><p><b>basedOn</b>: <a name=\\"jp-servicerequest-example-1\\"> </a></p><blockquote><p/><p><a name=\\"jp-servicerequest-example-1\\"> </a></p><p><b>status</b>: active</p><p><b>intent</b>: original-order</p><p><b>code</b>: 生化学検査 <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (localcode#12345678)</span></p><p><b>subject</b>: <a href=\\"Patient-jp-patient-example-1.html\\">Patient/jp-patient-example-1</a> &quot; 山田&quot;</p><p><b>encounter</b>: <a href=\\"Encounter-jp-encounter-example-1.html\\">Encounter/jp-encounter-example-1</a></p><p><b>occurrence</b>: 2021-10-19 01:15:00+0900</p><p><b>requester</b>: <a href=\\"Practitioner-jp-practitioner-example-female-1.html\\">Practitioner/jp-practitioner-example-female-1</a> &quot; 東京&quot;</p><p><b>performer</b>: <a href=\\"Practitioner-jp-practitioner-example-male-2.html\\">Practitioner/jp-practitioner-example-male-2</a> &quot; 愛知&quot;</p></blockquote><p><b>status</b>: final</p><p><b>category</b>: Laboratory <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (<a href=\\"CodeSystem-jp-simpleobservationcategory-cs.html\\">JP Core Simple Observation Category CodeSystem</a>#laboratory)</span></p><p><b>code</b>: 尿酸 <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (localcode#05104; <a href=\\"https://simplifier.net/resolve?scope=jpfhir-terminology@1.1.1&amp;canonical=urn:oid:1.2.392.200119.4.504\\">JP Core Observation LabResult Code CodeSystem</a>#3C020000002327101)</span></p><p><b>subject</b>: <a href=\\"Patient-jp-patient-example-1.html\\">Patient/jp-patient-example-1</a> &quot; 山田&quot;</p><p><b>effective</b>: 2021-10-19 02:20:00+0900</p><p><b>performer</b>: <a href=\\"Practitioner-jp-practitioner-example-female-1.html\\">Practitioner/jp-practitioner-example-female-1</a> &quot; 東京&quot;</p><p><b>value</b>: 8.5 mg/dL</p><p><b>interpretation</b>: H <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (<a href=\\"http://terminology.hl7.org/5.3.0/CodeSystem-v3-ObservationInterpretation.html\\">ObservationInterpretation</a>#H &quot;High&quot;)</span></p><p><b>specimen</b>: <a href=\\"Specimen-jp-specimen-example-1.html\\">Specimen/jp-specimen-example-1</a></p><h3>ReferenceRanges</h3><table class=\\"grid\\"><tr><td style=\\"display: none\\">-</td><td><b>Low</b></td><td><b>High</b></td><td><b>Type</b></td></tr><tr><td style=\\"display: none\\">*</td><td>2.1</td><td>7</td><td>Normal Range <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (<a href=\\"http://terminology.hl7.org/5.3.0/CodeSystem-referencerange-meaning.html\\">Observation Reference Range Meaning Codes</a>#normal)</span></td></tr></table><hr/><blockquote><p><b>Generated Narrative: ServiceRequest #jp-servicerequest-example-1</b><a name=\\"jp-servicerequest-example-1\\"> </a></p><p><b>status</b>: active</p><p><b>intent</b>: original-order</p><p><b>code</b>: 生化学検査 <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (localcode#12345678)</span></p><p><b>subject</b>: <a href=\\"Patient-jp-patient-example-1.html\\">Patient/jp-patient-example-1</a> &quot; 山田&quot;</p><p><b>encounter</b>: <a href=\\"Encounter-jp-encounter-example-1.html\\">Encounter/jp-encounter-example-1</a></p><p><b>occurrence</b>: 2021-10-19 01:15:00+0900</p><p><b>requester</b>: <a href=\\"Practitioner-jp-practitioner-example-female-1.html\\">Practitioner/jp-practitioner-example-female-1</a> &quot; 東京&quot;</p><p><b>performer</b>: <a href=\\"Practitioner-jp-practitioner-example-male-2.html\\">Practitioner/jp-practitioner-example-male-2</a> &quot; 愛知&quot;</p></blockquote></div>"
   },
-
-  "contained" : [{
-    "resourceType" : "ServiceRequest",
-    "id" : "jp-servicerequest-example-1",
-    "status" : "active",
-    "intent" : "original-order",
-    "code" : {
-      "coding" : [{
-        "system" : "http://abc-hospital.local/fhir/ObservationOrder/localcode",
-        "code" : "12345678"
-      }],
-      "text" : "生化学検査"
-    },
-    "subject" : {
-      "reference" : "Patient/jp-patient-example-1"
-    },
-    "encounter" : {
-      "reference" : "Encounter/jp-encounter-example-1"
-    },
-    "occurrenceDateTime" : "2021-10-19T01:15:00+09:00",
-    "requester" : {
-      "reference" : "Practitioner/jp-practitioner-example-female-1"
-    },
-    "performer" : [{
-      "reference" : "Practitioner/jp-practitioner-example-male-2"
-    }]
-  }],
-  "basedOn" : [{
-    "reference" : "#jp-servicerequest-example-1"
-  }],
-  "status" : "final",
-  "category" : [{
-    "coding" : [{
-      "system" : "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
-      "code" : "laboratory"
-    }]
-  }],
-  "code" : {
-    "coding" : [{
-      "system" : "http://abc-hospital.local/fhir/Observation/localcode",
-      "code" : "05104",
-      "display" : "尿酸"
-    },
+  "contained": [
     {
-      "system" : "urn:oid:1.2.392.200119.4.504",
-      "code" : "3C020000002327101"
-    }],
-    "text" : "尿酸"
-  },
-  "subject" : {
-    "reference" : "Patient/jp-patient-example-1"
-  },
-  "effectiveDateTime" : "2021-10-19T02:20:00+09:00",
-  "performer" : [{
-    "reference" : "Practitioner/jp-practitioner-example-female-1"
-  }],
-  "valueQuantity" : {
-    "value" : 8.5,
-    "unit" : "mg/dL"
-  },
-  "interpretation" : [{
-    "coding" : [{
-      "system" : "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-      "code" : "H",
-      "display" : "High"
-    }],
-    "text" : "H"
-  }],
-
-  "specimen" : {
-    "reference" : "Specimen/jp-specimen-example-1"
-  },
-  "referenceRange" : [{
-    "low" : {
-      "value" : 2.1
-    },
-    "high" : {
-      "value" : 7
-    },
-    "type" : {
-      "coding" : [{
-        "system" : "http://terminology.hl7.org/CodeSystem/referencerange-meaning",
-        "code" : "normal",
-        "display" : "Normal Range"
-      }]
+      "resourceType": "ServiceRequest",
+      "id": "jp-servicerequest-example-1",
+      "status": "active",
+      "intent": "original-order",
+      "code": {
+        "coding": [
+          {
+            "system": "http://abc-hospital.local/fhir/ObservationOrder/localcode",
+            "code": "12345678"
+          }
+        ],
+        "text": "生化学検査"
+      },
+      "subject": {
+        "reference": "Patient/jp-patient-example-1"
+      },
+      "encounter": {
+        "reference": "Encounter/jp-encounter-example-1"
+      },
+      "occurrenceDateTime": "2021-10-19T01:15:00+09:00",
+      "requester": {
+        "reference": "Practitioner/jp-practitioner-example-female-1"
+      },
+      "performer": [
+        {
+          "reference": "Practitioner/jp-practitioner-example-male-2"
+        }
+      ]
     }
-  }]
+  ],
+  "basedOn": [
+    {
+      "reference": "#jp-servicerequest-example-1"
+    }
+  ],
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
+          "code": "laboratory"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://abc-hospital.local/fhir/Observation/localcode",
+        "code": "05104",
+        "display": "尿酸"
+      },
+      {
+        "system": "urn:oid:1.2.392.200119.4.504",
+        "code": "3C020000002327101"
+      }
+    ],
+    "text": "尿酸"
+  },
+  "subject": {
+    "reference": "Patient/jp-patient-example-1"
+  },
+  "effectiveDateTime": "2021-10-19T02:20:00+09:00",
+  "performer": [
+    {
+      "reference": "Practitioner/jp-practitioner-example-female-1"
+    }
+  ],
+  "valueQuantity": {
+    "value": 8.5,
+    "unit": "mg/dL"
+  },
+  "interpretation": [
+      {
+            "coding": [
+                {
+                    "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                    "code": "H",
+                    "display": "High"
+                }
+            ],
+            "text": "H"
+        }
+    ],
+    "specimen": {
+        "reference": "Specimen/jp-specimen-example-1"
+    },
+    "referenceRange": [
+        {
+            "low": {
+                "value": 2.1
+            },
+            "high": {
+                "value": 7
+            },
+            "type": {
+                "coding": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/referencerange-meaning",
+                        "code": "normal",
+                        "display": "Normal Range"
+                    }
+                ]
+            }
+        }
+    ]
 }
 JSON
 
-FLAT_JSON = <<JSON
+FLAT_JSON = <<~JSON
 {
   "laboratorytestreport/category|value": "event",
   "laboratorytestreport/category|terminology": "openehr",
@@ -129,7 +157,7 @@ FLAT_JSON = <<JSON
   "laboratorytestreport/context/setting|terminology": "openehr",
   "laboratorytestreport/context/_end_time": "2002-07-25T00:00:00",
   "laboratorytestreport/context/_health_care_facility|name": "DOE, John",
-  "laboratorytestreport/laboratory_test_result/any_event:0/test_name": "Lorem ipsum",
+  "laboratorytestreport/laboratory_test_result/any_event:0/test_name": "生化学検査",
   "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|code": "at0107",
   "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|terminology": "local",
   "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|value": "Registered",
