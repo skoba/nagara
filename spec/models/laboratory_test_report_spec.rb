@@ -22,124 +22,288 @@ end
 
 FHIR_JSON = <<~JSON
 {
-  "resourceType": "Observation",
-  "id": "jp-observation-labresult-example-1",
-  "meta": {
-    "profile": [
-      "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
-    ]
-  },
-  "text": {
-    "status": "generated",
-    "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative: Observation</b><a name=\\"jp-observation-labresult-example-1\\"> </a></p><div style=\\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\\"><p style=\\"margin-bottom: 0px\\">Resource Observation &quot;jp-observation-labresult-example-1&quot; </p><p style=\\"margin-bottom: 0px\\">Profile: <a href=\\"StructureDefinition-jp-observation-labresult.html\\">JP Core Observation LabResult Profile</a></p></div><p><b>basedOn</b>: <a name=\\"jp-servicerequest-example-1\\"> </a></p><blockquote><p/><p><a name=\\"jp-servicerequest-example-1\\"> </a></p><p><b>status</b>: active</p><p><b>intent</b>: original-order</p><p><b>code</b>: 生化学検査 <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (localcode#12345678)</span></p><p><b>subject</b>: <a href=\\"Patient-jp-patient-example-1.html\\">Patient/jp-patient-example-1</a> &quot; 山田&quot;</p><p><b>encounter</b>: <a href=\\"Encounter-jp-encounter-example-1.html\\">Encounter/jp-encounter-example-1</a></p><p><b>occurrence</b>: 2021-10-19 01:15:00+0900</p><p><b>requester</b>: <a href=\\"Practitioner-jp-practitioner-example-female-1.html\\">Practitioner/jp-practitioner-example-female-1</a> &quot; 東京&quot;</p><p><b>performer</b>: <a href=\\"Practitioner-jp-practitioner-example-male-2.html\\">Practitioner/jp-practitioner-example-male-2</a> &quot; 愛知&quot;</p></blockquote><p><b>status</b>: final</p><p><b>category</b>: Laboratory <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (<a href=\\"CodeSystem-jp-simpleobservationcategory-cs.html\\">JP Core Simple Observation Category CodeSystem</a>#laboratory)</span></p><p><b>code</b>: 尿酸 <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (localcode#05104; <a href=\\"https://simplifier.net/resolve?scope=jpfhir-terminology@1.1.1&amp;canonical=urn:oid:1.2.392.200119.4.504\\">JP Core Observation LabResult Code CodeSystem</a>#3C020000002327101)</span></p><p><b>subject</b>: <a href=\\"Patient-jp-patient-example-1.html\\">Patient/jp-patient-example-1</a> &quot; 山田&quot;</p><p><b>effective</b>: 2021-10-19 02:20:00+0900</p><p><b>performer</b>: <a href=\\"Practitioner-jp-practitioner-example-female-1.html\\">Practitioner/jp-practitioner-example-female-1</a> &quot; 東京&quot;</p><p><b>value</b>: 8.5 mg/dL</p><p><b>interpretation</b>: H <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (<a href=\\"http://terminology.hl7.org/5.3.0/CodeSystem-v3-ObservationInterpretation.html\\">ObservationInterpretation</a>#H &quot;High&quot;)</span></p><p><b>specimen</b>: <a href=\\"Specimen-jp-specimen-example-1.html\\">Specimen/jp-specimen-example-1</a></p><h3>ReferenceRanges</h3><table class=\\"grid\\"><tr><td style=\\"display: none\\">-</td><td><b>Low</b></td><td><b>High</b></td><td><b>Type</b></td></tr><tr><td style=\\"display: none\\">*</td><td>2.1</td><td>7</td><td>Normal Range <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (<a href=\\"http://terminology.hl7.org/5.3.0/CodeSystem-referencerange-meaning.html\\">Observation Reference Range Meaning Codes</a>#normal)</span></td></tr></table><hr/><blockquote><p><b>Generated Narrative: ServiceRequest #jp-servicerequest-example-1</b><a name=\\"jp-servicerequest-example-1\\"> </a></p><p><b>status</b>: active</p><p><b>intent</b>: original-order</p><p><b>code</b>: 生化学検査 <span style=\\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\\"> (localcode#12345678)</span></p><p><b>subject</b>: <a href=\\"Patient-jp-patient-example-1.html\\">Patient/jp-patient-example-1</a> &quot; 山田&quot;</p><p><b>encounter</b>: <a href=\\"Encounter-jp-encounter-example-1.html\\">Encounter/jp-encounter-example-1</a></p><p><b>occurrence</b>: 2021-10-19 01:15:00+0900</p><p><b>requester</b>: <a href=\\"Practitioner-jp-practitioner-example-female-1.html\\">Practitioner/jp-practitioner-example-female-1</a> &quot; 東京&quot;</p><p><b>performer</b>: <a href=\\"Practitioner-jp-practitioner-example-male-2.html\\">Practitioner/jp-practitioner-example-male-2</a> &quot; 愛知&quot;</p></blockquote></div>"
-  },
-  "contained": [
-    {
-      "resourceType": "ServiceRequest",
-      "id": "jp-servicerequest-example-1",
-      "status": "active",
-      "intent": "original-order",
-      "code": {
-        "coding": [
-          {
-            "system": "http://abc-hospital.local/fhir/ObservationOrder/localcode",
-            "code": "12345678"
-          }
-        ],
-        "text": "生化学検査"
-      },
-      "subject": {
-        "reference": "Patient/jp-patient-example-1"
-      },
-      "encounter": {
-        "reference": "Encounter/jp-encounter-example-1"
-      },
-      "occurrenceDateTime": "2021-10-19T01:15:00+09:00",
-      "requester": {
-        "reference": "Practitioner/jp-practitioner-example-female-1"
-      },
-      "performer": [
-        {
-          "reference": "Practitioner/jp-practitioner-example-male-2"
-        }
+    "resourceType": "DiagnosticReport",
+    "id": "jp-diagnosticreport-labresult-example-1",
+    "meta": {
+      "profile": [
+        http://jpfhir.jp/fhir/core/StructureDefinition/JP_DiagnosticReport_LabResult"
       ]
-    }
-  ],
-  "basedOn": [
-    {
-      "reference": "#jp-servicerequest-example-1"
-    }
-  ],
-  "status": "final",
-  "category": [
-    {
-      "coding": [
-        {
-          "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
-          "code": "laboratory"
-        }
-      ]
-    }
-  ],
-  "code": {
-    "coding": [
+    },
+    "text": {
+      "status": "generated",
+      "div" : "中略"
+    },
+    "contained": [
       {
-        "system": "http://abc-hospital.local/fhir/Observation/localcode",
-        "code": "05104",
-        "display": "尿酸"
-      },
-      {
-        "system": "urn:oid:1.2.392.200119.4.504",
-        "code": "3C020000002327101"
-      }
-    ],
-    "text": "尿酸"
-  },
-  "subject": {
-    "reference": "Patient/jp-patient-example-1"
-  },
-  "effectiveDateTime": "2021-10-19T02:20:00+09:00",
-  "performer": [
-    {
-      "reference": "Practitioner/jp-practitioner-example-female-1"
-    }
-  ],
-  "valueQuantity": {
-    "value": 8.5,
-    "unit": "mg/dL"
-  },
-  "interpretation": [
-      {
-            "coding": [
+        "resourceType": "Observation",
+          "id": "inner-observation-labresult-1",
+          "meta": {
+            "profile": [
+              "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
+            ]
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
                 {
-                    "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-                    "code": "H",
-                    "display": "High"
+                  "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
+                  "code": "laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://abc-hospital.local/fhir/Observation/localcode",
+                "code": "123",
+                "display": "ヘモグロビン"
+              },
+              {
+                "system": "urn:oid:1.2.392.200119.4.504",
+                "code": "2A990000001930953"
+              }
+            ],
+            "text": "ヘモグロビン"
+          },
+          "subject": {
+            "reference": "Patient/jp-patient-example-1"
+          },
+          "effectiveDateTime": "2021-03-04T08:30:00+09:00",
+          "performer": [
+            {
+              "reference": "Organization/jp-organization-example-hospital",
+              "display": "健康第一病院"
+            }
+          ],
+          "valueQuantity": {
+            "value": 176,
+            "unit": "g/L",
+            "system": "http://unitsofmeasure.org",
+            "code": "g/L"
+          },
+          "specimen": {
+            "reference": "Specimen/jp-specimen-example-2"
+          },
+          "referenceRange": [
+            {
+              "low": {
+                "value": 135,
+                "unit": "g/L",
+                "system": "http://unitsofmeasure.org",
+                "code": "g/L"
+              },
+              "high": {
+                "value": 180,
+                "unit": "g/L",
+                "system": "http://unitsofmeasure.org",
+                "code": "g/L"
+              }
+            }
+          ]
+        },
+        {
+          "resourceType": "Observation",
+          "id": "inner-observation-labresult-2",
+          "meta": {
+            "profile": [
+              "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
+            ]
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
+                  "code": "laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+          "coding": [
+            {
+              "system": "http://abc-hospital.local/fhir/Observation/localcode",
+              "code": "456",
+              "display": "赤血球数"
+            },
+            {
+                        "system": "urn:oid:1.2.392.200119.4.504",
+                        "code": "2A990000001992051"
+                    }
+                ],
+                "text": "赤血球数"
+            },
+            "subject": {
+                "reference": "Patient/jp-patient-example-1"
+            },
+            "effectiveDateTime": "2021-03-04T08:30:00+09:00",
+            "performer": [
+                {
+                    "reference": "Organization/jp-organization-example-hospital",
+                    "display": "健康第一病院"
                 }
             ],
-            "text": "H"
-        }
-    ],
-    "specimen": {
-        "reference": "Specimen/jp-specimen-example-1"
-    },
-    "referenceRange": [
+            "valueQuantity": {
+                "value": 5.9,
+                "unit": "10*6/uL",
+                "system": "http://unitsofmeasure.org",
+                "code": "10*6/uL"
+            },
+            "specimen": {
+                "reference": "Specimen/jp-specimen-example-2"
+            },
+            "referenceRange": [
+                {
+                    "low": {
+                        "value": 4.2,
+                        "unit": "10*6./L",
+                        "system": "http://unitsofmeasure.org",
+                        "code": "10*6/uL"
+                    },
+                    "high": {
+                        "value": 6,
+                        "unit": "10*6./L",
+                        "system": "http://unitsofmeasure.org",
+                        "code": "10*6/uL"
+                    }
+                }
+            ]
+        },
         {
-            "low": {
-                "value": 2.1
+            "resourceType": "Observation",
+            "id": "inner-observation-labresult-3",
+            "meta": {
+                "profile": [
+                    "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
+                ]
             },
-            "high": {
-                "value": 7
-            },
-            "type": {
+            "status": "final",
+            "category": [
+                {
+                    "coding": [
+                        {
+                            "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
+                            "code": "laboratory"
+                        }
+                    ]
+                }
+            ],
+            "code": {
                 "coding": [
                     {
-                        "system": "http://terminology.hl7.org/CodeSystem/referencerange-meaning",
-                        "code": "normal",
-                        "display": "Normal Range"
+                        "system": "http://abc-hospital.local/fhir/Observation/localcode",
+                        "code": "789",
+                        "display": "ヘマトクリット"
+                    },
+                    {
+                        "system": "urn:oid:1.2.392.200119.4.504",
+                        "code": "2A990000001930954"
                     }
-                ]
+                ],
+                "text": "ヘマトクリット"
+            },
+            "subject": {
+                "reference": "Patient/jp-patient-example-1"
+            },
+            "effectiveDateTime": "2021-03-04T08:30:00+09:00",
+            "performer": [
+                {
+                    "reference": "Organization/jp-organization-example-hospital",
+                    "display": "健康第一病院"
+                }
+            ],
+            "valueQuantity": {
+                "value": 55,
+                "unit": "%"
+            },
+            "interpretation": [
+                {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+                            "code": "H"
+                        }
+                    ]
+                }
+            ],
+            "specimen": {
+                "reference": "Specimen/jp-specimen-example-2"
+            },
+            "referenceRange": [
+                {
+                    "low": {
+                        "value": 38,
+                        "unit": "%"
+                    },
+                    "high": {
+                        "value": 52,
+                        "unit": "%"
+                    }
+                }
+            ]
+        }
+    ],
+    "identifier": [
+        {
+            "system": "http://abc-hospital.local/fhir/lab/reportid",
+            "value": "5234342"
+        }
+    ],
+    "status": "final",
+    "category": [
+        {
+            "coding": [
+                {
+                    "system": "http://loinc.org",
+                    "code": "LP29693-6",
+                    "display": "検体検査"
+                }
+            ]
+        }
+    ],
+    "code": {
+        "coding": [
+            {
+                "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_DocumentCodes_CS",
+                "code": "11502-2",
+                "display": "検体検査報告書"
             }
+        ]
+    },
+    "subject": {
+        "reference": "Patient/jp-patient-example-1"
+    },
+    "encounter": {
+        "reference": "Encounter/jp-encounter-example-1"
+    },
+    "effectiveDateTime": "2021-08-25T08:30:00+09:00",
+    "issued": "2021-03-04T11:45:33+09:00",
+    "performer": [
+        {
+            "reference": "Organization/jp-organization-example-hospital",
+            "display": "健康第一病院"
+        }
+    ],
+    "result": [
+        {
+            "reference": "#inner-observation-labresult-1"
+        },
+        {
+            "reference": "#inner-observation-labresult-2"
+        },
+        {
+            "reference": "#inner-observation-labresult-3"
+        }
+    ],
+    "presentedForm": [
+        {
+            "contentType": "application/pdf",
+            "language": "ja-JP",
+            "data": "JVBERi0xLjUNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFIvTGFuZyhqYS1KUCkgL1N0cnVjdFRyZWVSb290IDEzIDAgUi9NYXJrSW5mbzw8L01hcmtlZCB0cnVlPj4+Pg0KZW5kb2JqDQoyIDAgb2JqDQo8PC9UeXBlL1BhZ2VzL0NvdW50IDEvS2lkc1sgMyAwIFJdID4+DQplbmRvYmoNCjMgMCBvYmoN",
+            "title": "検査結果PDFレポート"
         }
     ]
 }
