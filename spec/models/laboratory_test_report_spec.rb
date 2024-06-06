@@ -56,32 +56,28 @@ FHIR_JSON = <<~JSON
           "code": {
             "coding": [
               {
-                "system": "http://abc-hospital.local/fhir/Observation/localcode",
-                "code": "123",
-                "display": "ヘモグロビン"
+                "system": "https://fhir.loinc.org",
+                "code": "718-7",
+                "display": "Hemoglobin (Bld) [Mass/Vol]"
               },
-              {
-                "system": "urn:oid:1.2.392.200119.4.504",
-                "code": "2A990000001930953"
-              }
             ],
-            "text": "ヘモグロビン"
+            "text": "Hb"
           },
           "subject": {
             "reference": "Patient/jp-patient-example-1"
           },
-          "effectiveDateTime": "2021-03-04T08:30:00+09:00",
+          "effectiveDateTime": "2024-06-06T08:30:00+09:00",
           "performer": [
             {
               "reference": "Organization/jp-organization-example-hospital",
-              "display": "健康第一病院"
+              "display": "Nagara hospital"
             }
           ],
           "valueQuantity": {
-            "value": 176,
-            "unit": "g/L",
+            "value": 13.4,
+            "unit": "g/dL",
             "system": "http://unitsofmeasure.org",
-            "code": "g/L"
+            "code": "g/dL"
           },
           "specimen": {
             "reference": "Specimen/jp-specimen-example-2"
@@ -89,16 +85,16 @@ FHIR_JSON = <<~JSON
           "referenceRange": [
             {
               "low": {
-                "value": 135,
-                "unit": "g/L",
+                "value": 13.0,
+                "unit": "g/dL",
                 "system": "http://unitsofmeasure.org",
-                "code": "g/L"
+                "code": "g/dL"
               },
               "high": {
-                "value": 180,
-                "unit": "g/L",
+                "value": 17.0,
+                "unit": "g/dL",
                 "system": "http://unitsofmeasure.org",
-                "code": "g/L"
+                "code": "g/dL"
               }
             }
           ]
