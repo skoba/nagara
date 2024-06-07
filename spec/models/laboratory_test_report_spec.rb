@@ -22,11 +22,11 @@ end
 
 FHIR_JSON = <<~JSON
 {
-    "resourceType": "DiagnosticReport",
-    "id": "jp-diagnosticreport-labresult-example-1",
-    "meta": {
-      "profile": [
-        http://jpfhir.jp/fhir/core/StructureDefinition/JP_DiagnosticReport_LabResult"
+  "resourceType": "DiagnosticReport",
+  "id": "jp-diagnosticreport-labresult-example-1",
+  "meta": {
+    "profile": [
+        "http://jpfhir.jp/fhir/core/StructureDefinition/JP_DiagnosticReport_LabResult"
       ]
     },
     "text": {
@@ -57,11 +57,11 @@ FHIR_JSON = <<~JSON
             "coding": [
               {
                 "system": "https://fhir.loinc.org",
-                "code": "718-7",
-                "display": "Hemoglobin (Bld) [Mass/Vol]"
-              },
+                "code": "26464-8",
+                "display": " Leukocytes [#/volume] in Blood"
+              }
             ],
-            "text": "Hb"
+            "text": "白血球数"
           },
           "subject": {
             "reference": "Patient/jp-patient-example-1"
@@ -74,10 +74,10 @@ FHIR_JSON = <<~JSON
             }
           ],
           "valueQuantity": {
-            "value": 13.4,
-            "unit": "g/dL",
+            "value": 6.8,
+            "unit": "10*3/uL",
             "system": "http://unitsofmeasure.org",
-            "code": "g/dL"
+            "code": "10*3/uL"
           },
           "specimen": {
             "reference": "Specimen/jp-specimen-example-2"
@@ -85,22 +85,22 @@ FHIR_JSON = <<~JSON
           "referenceRange": [
             {
               "low": {
-                "value": 13.0,
-                "unit": "g/dL",
+                "value": 3.2,
+                "unit": "10*3/uL",
                 "system": "http://unitsofmeasure.org",
-                "code": "g/dL"
+                "code": "10*3/uL"
               },
               "high": {
-                "value": 17.0,
-                "unit": "g/dL",
+                "value": 9.8,
+                "unit": "10*3/uL",
                 "system": "http://unitsofmeasure.org",
-                "code": "g/dL"
+                "code": "10*3/uL"
               }
             }
           ]
         },
-        {
-          "resourceType": "Observation",
+      {
+        "resourceType": "Observation",
           "id": "inner-observation-labresult-2",
           "meta": {
             "profile": [
@@ -119,34 +119,95 @@ FHIR_JSON = <<~JSON
             }
           ],
           "code": {
-          "coding": [
-            {
-              "system": "http://abc-hospital.local/fhir/Observation/localcode",
-              "code": "456",
-              "display": "赤血球数"
-            },
-            {
-                        "system": "urn:oid:1.2.392.200119.4.504",
-                        "code": "2A990000001992051"
-                    }
-                ],
-                "text": "赤血球数"
-            },
-            "subject": {
-                "reference": "Patient/jp-patient-example-1"
-            },
-            "effectiveDateTime": "2021-03-04T08:30:00+09:00",
-            "performer": [
-                {
-                    "reference": "Organization/jp-organization-example-hospital",
-                    "display": "健康第一病院"
-                }
+            "coding": [
+              {
+                "system": "https://fhir.loinc.org",
+                "code": "26453-1",
+                "display": "Erythrocytes [#/volume] in Blood"
+              }
             ],
-            "valueQuantity": {
-                "value": 5.9,
+            "text": "赤血球数"
+          },
+          "subject": {
+            "reference": "Patient/jp-patient-example-1"
+          },
+          "effectiveDateTime": "2024-06-06T08:30:00+09:00",
+          "performer": [
+            {
+              "reference": "Organization/jp-organization-example-hospital",
+              "display": "Nagara hospital"
+            }
+          ],
+          "valueQuantity": {
+            "value": 4.05,
+            "unit": "10*6/uL",
+            "system": "http://unitsofmeasure.org",
+            "code": "10*6/uL"
+          },
+          "specimen": {
+            "reference": "Specimen/jp-specimen-example-2"
+          },
+          "referenceRange": [
+            {
+              "low": {
+                "value": 4.0,
                 "unit": "10*6/uL",
                 "system": "http://unitsofmeasure.org",
                 "code": "10*6/uL"
+              },
+              "high": {
+                "value": 5.7,
+                "unit": "10*6/uL",
+                "system": "http://unitsofmeasure.org",
+                "code": "10*6/uL"
+              }
+            }
+          ]
+        },
+        {
+          "resourceType": "Observation",
+          "id": "inner-observation-labresult-3",
+          "meta": {
+            "profile": [
+              "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
+            ]
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
+                  "code": "laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+             "coding": [
+              {
+                "system": "https://fhir.loinc.org",
+                "code": "718-7",
+                "display": "Hemoglobin [Mass/volume] in Blood" 
+              }
+            ],
+            "text": "血色素量"
+          },
+            "subject": {
+                "reference": "Patient/jp-patient-example-1"
+            },
+            "effectiveDateTime": "2024-06-06T08:30:00+09:00",
+            "performer": [
+                {
+                    "reference": "Organization/jp-organization-example-hospital",
+                    "display": "Nagara hospital"
+                }
+            ],
+            "valueQuantity": {
+                "value": 13.0,
+                "unit": "g/dL",
+                "system": "http://unitsofmeasure.org",
+                "code": "g/dL"
             },
             "specimen": {
                 "reference": "Specimen/jp-specimen-example-2"
@@ -154,23 +215,23 @@ FHIR_JSON = <<~JSON
             "referenceRange": [
                 {
                     "low": {
-                        "value": 4.2,
-                        "unit": "10*6./L",
+                        "value": 13.0,
+                        "unit": "g/dL",
                         "system": "http://unitsofmeasure.org",
-                        "code": "10*6/uL"
+                        "code": "g/dL"
                     },
                     "high": {
-                        "value": 6,
-                        "unit": "10*6./L",
+                        "value": 17.0,
+                        "unit": "g/dL",
                         "system": "http://unitsofmeasure.org",
-                        "code": "10*6/uL"
+                        "code": "g/dL"
                     }
                 }
             ]
         },
         {
             "resourceType": "Observation",
-            "id": "inner-observation-labresult-3",
+            "id": "inner-observation-labresult-4",
             "meta": {
                 "profile": [
                     "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
@@ -190,13 +251,9 @@ FHIR_JSON = <<~JSON
             "code": {
                 "coding": [
                     {
-                        "system": "http://abc-hospital.local/fhir/Observation/localcode",
-                        "code": "789",
-                        "display": "ヘマトクリット"
-                    },
-                    {
-                        "system": "urn:oid:1.2.392.200119.4.504",
-                        "code": "2A990000001930954"
+                        "system": "https://fhir.loinc.org",
+                        "code": "20570-8",
+                        "display": "Hematocrit [Volume Fraction] of Blood"
                     }
                 ],
                 "text": "ヘマトクリット"
@@ -204,48 +261,97 @@ FHIR_JSON = <<~JSON
             "subject": {
                 "reference": "Patient/jp-patient-example-1"
             },
-            "effectiveDateTime": "2021-03-04T08:30:00+09:00",
+            "effectiveDateTime": "2024-06-06T08:30:00+09:00",
             "performer": [
                 {
                     "reference": "Organization/jp-organization-example-hospital",
-                    "display": "健康第一病院"
+                    "display": "Nagara hospital"
                 }
             ],
             "valueQuantity": {
-                "value": 55,
+                "value": 40.1,
                 "unit": "%"
             },
-            "interpretation": [
-                {
-                    "coding": [
-                        {
-                            "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
-                            "code": "H"
-                        }
-                    ]
-                }
-            ],
             "specimen": {
                 "reference": "Specimen/jp-specimen-example-2"
             },
             "referenceRange": [
                 {
                     "low": {
-                        "value": 38,
+                        "value": 38.5,
                         "unit": "%"
                     },
                     "high": {
-                        "value": 52,
+                        "value": 51.8,
                         "unit": "%"
                     }
+                }
+            ]
+        },
+        {
+          "resourceType": "Observation",
+          "id": "inner-observation-labresult-4",
+          "meta": {
+            "profile": [
+              "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
+            ]
+          },
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
+                  "code": "laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "https://fhir.loinc.org",
+                "code": "26515-7",
+                "display": "Platelets [#/volume] in Blood"
+              }
+            ],
+            "text": "血小板数"
+          },
+          "subject": {
+            "reference": "Patient/jp-patient-example-1"
+          },
+          "effectiveDateTime": "2024-06-06T08:30:00+09:00",
+            "performer": [
+                {
+                    "reference": "Organization/jp-organization-example-hospital",
+                    "display": "Nagara hospital"
+                }
+            ],
+            "valueQuantity": {
+                "value": 309,
+                "unit": "10*3/uL"
+            },
+            "specimen": {
+                "reference": "Specimen/jp-specimen-example-2"
+            },
+            "referenceRange": [
+                {
+                  "low": {
+                    "value": 120,
+                    "unit": "10*3/uL"
+                  },
+                  "high": {
+                    "value": 450,
+                    "unit": "10*3/uL"
+                  }
                 }
             ]
         }
     ],
     "identifier": [
         {
-            "system": "http://abc-hospital.local/fhir/lab/reportid",
-            "value": "5234342"
+            "system": "http://nagara-hospital.local/fhir/lab/reportid",
+            "value": "123456"
         }
     ],
     "status": "final",
@@ -254,8 +360,8 @@ FHIR_JSON = <<~JSON
             "coding": [
                 {
                     "system": "http://loinc.org",
-                    "code": "LP29693-6",
-                    "display": "検体検査"
+                    "code": "55429-5",
+                    "display": "血算"
                 }
             ]
         }
@@ -275,32 +381,30 @@ FHIR_JSON = <<~JSON
     "encounter": {
         "reference": "Encounter/jp-encounter-example-1"
     },
-    "effectiveDateTime": "2021-08-25T08:30:00+09:00",
-    "issued": "2021-03-04T11:45:33+09:00",
+    "effectiveDateTime": "2024-08-25T08:30:00+09:00",
+    "issued": "2024-06-06T08:30:00+09:00",
     "performer": [
         {
             "reference": "Organization/jp-organization-example-hospital",
-            "display": "健康第一病院"
+            "display": "nagara hospital"
         }
     ],
     "result": [
-        {
-            "reference": "#inner-observation-labresult-1"
-        },
-        {
-            "reference": "#inner-observation-labresult-2"
-        },
-        {
-            "reference": "#inner-observation-labresult-3"
-        }
-    ],
-    "presentedForm": [
-        {
-            "contentType": "application/pdf",
-            "language": "ja-JP",
-            "data": "JVBERi0xLjUNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFIvTGFuZyhqYS1KUCkgL1N0cnVjdFRyZWVSb290IDEzIDAgUi9NYXJrSW5mbzw8L01hcmtlZCB0cnVlPj4+Pg0KZW5kb2JqDQoyIDAgb2JqDQo8PC9UeXBlL1BhZ2VzL0NvdW50IDEvS2lkc1sgMyAwIFJdID4+DQplbmRvYmoNCjMgMCBvYmoN",
-            "title": "検査結果PDFレポート"
-        }
+      {
+        "reference": "#inner-observation-labresult-1"
+      },
+      {
+        "reference": "#inner-observation-labresult-2"
+      },
+      {
+        "reference": "#inner-observation-labresult-3"
+      },
+      {
+        "reference": "#inner-observation-labresult-4"
+      },
+      {
+        "reference": "#inner-observation-labresult-5"
+      }
     ]
 }
 JSON
@@ -311,13 +415,13 @@ FLAT_JSON = <<~JSON
   "laboratorytestreport/category|terminology": "openehr",
   "laboratorytestreport/category|code": "433",
   "laboratorytestreport/context/report_id": "0002228",
-  "laboratorytestreport/context/start_time": "2002-07-25T00:00:00",
+  "laboratorytestreport/context/start_time": "2024-06-06T08:30:00+09:00",
   "laboratorytestreport/context/setting|value": "home",
   "laboratorytestreport/context/setting|code": "225",
   "laboratorytestreport/context/setting|terminology": "openehr",
-  "laboratorytestreport/context/_end_time": "2002-07-25T00:00:00",
-  "laboratorytestreport/context/_health_care_facility|name": "DOE, John",
-  "laboratorytestreport/laboratory_test_result/any_event:0/test_name": "生化学検査",
+  "laboratorytestreport/context/_end_time": "2024-06-06T08:30:00+09:00",
+  "laboratorytestreport/context/_health_care_facility|name": "nagara hospital",
+  "laboratorytestreport/laboratory_test_result/any_event:0/test_name": "",
   "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|code": "at0107",
   "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|terminology": "local",
   "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|value": "Registered",
