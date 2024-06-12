@@ -45,6 +45,7 @@ gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
+gem 'fhir_models'
 gem 'httpclient'
 gem 'nokogiri'
 
@@ -72,7 +73,7 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'rubocop'
   gem 'rubocop-factory_bot', require: false
-  gem 'rubocop-inflector', require: false
+  # gem 'rubocop-inflector', require: false
   gem 'rubocop-rails', require: false
 
   gem 'spring'

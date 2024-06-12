@@ -4,5 +4,3 @@ require:
   - rubocop-rspec
   - rubocop-rails
   - rubocop-factory_bot
-  - rubocop-inflector
-  - ./config/initializers/inflections

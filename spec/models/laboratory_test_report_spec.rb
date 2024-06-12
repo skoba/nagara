@@ -1,6 +1,5 @@
 RSpec.describe LaboratoryTestReport do
   let(:laboratory_test_report) { build :laboratory_test_report }
-  let(:fhir_json) { FHIR_JSON }
 
   describe 'Sample instance generation' do
     it 'generates a valid instance from factory_bot' do
@@ -10,11 +9,15 @@ RSpec.describe LaboratoryTestReport do
 
   describe 'parser' do
     it 'parse HL7 FHIR json' do
-      expect(LaboratoryTestReport.from_fhir_json(FHIR_JSON).test_name).to eq '生化学検査'
+      expect(LaboratoryTestReport.from_fhir_json(FHIR_JSON).test_name).to eq '検体検査報告書'
     end
 
     it 'parse FLAT JSON of openEHR' do
-      expect(LaboratoryTestReport.from_flat_json(FLAT_JSON).test_name).to eq '生化学検査'
+      expect(LaboratoryTestReport.from_flat_json(FLAT_JSON).test_name).to eq '検体検査報告書'
+    end
+
+    it 'parse MML' do
+      expect(LaboratoryTestReport.from_mml(MML).test_name).to eq '検体検査報告書'
     end
   end
 
@@ -26,99 +29,99 @@ FHIR_JSON = <<~JSON
   "id": "jp-diagnosticreport-labresult-example-1",
   "meta": {
     "profile": [
-        "http://jpfhir.jp/fhir/core/StructureDefinition/JP_DiagnosticReport_LabResult"
-      ]
-    },
-    "text": {
-      "status": "generated",
-      "div" : "中略"
-    },
-    "contained": [
-      {
-        "resourceType": "Observation",
-          "id": "inner-observation-labresult-1",
-          "meta": {
-            "profile": [
-              "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
-            ]
-          },
-          "status": "final",
-          "category": [
+      "http://jpfhir.jp/fhir/core/StructureDefinition/JP_DiagnosticReport_LabResult"
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div" : "中略"
+  },
+  "contained": [
+    {
+      "resourceType": "Observation",
+      "id": "inner-observation-labresult-1",
+      "meta": {
+        "profile": [
+          "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
+        ]
+      },
+      "status": "final",
+      "category": [
+        {
+          "coding": [
             {
-              "coding": [
-                {
-                  "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
-                  "code": "laboratory"
-                }
-              ]
+              "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
+                "code": "laboratory"
             }
-          ],
-          "code": {
-            "coding": [
-              {
-                "system": "https://fhir.loinc.org",
-                "code": "26464-8",
-                "display": " Leukocytes [#/volume] in Blood"
-              }
-            ],
-            "text": "白血球数"
-          },
-          "subject": {
-            "reference": "Patient/jp-patient-example-1"
-          },
-          "effectiveDateTime": "2024-06-06T08:30:00+09:00",
-          "performer": [
-            {
-              "reference": "Organization/jp-organization-example-hospital",
-              "display": "Nagara hospital"
-            }
-          ],
-          "valueQuantity": {
-            "value": 6.8,
+          ]
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "https://fhir.loinc.org",
+            "code": "26464-8",
+            "display": " Leukocytes [#/volume] in Blood"
+          }
+        ],
+        "text": "白血球数"
+      },
+      "subject": {
+        "reference": "Patient/jp-patient-example-1"
+      },
+      "effectiveDateTime": "2024-06-06T08:30:00+09:00",
+      "performer": [
+        {
+          "reference": "Organization/jp-organization-example-hospital",
+          "display": "Nagara hospital"
+        }
+      ],
+      "valueQuantity": {
+        "value": 6.8,
+        "unit": "10*3/uL",
+        "system": "http://unitsofmeasure.org",
+        "code": "10*3/uL"
+      },
+      "specimen": {
+        "reference": "Specimen/jp-specimen-example-2"
+      },
+      "referenceRange": [
+        {
+          "low": {
+            "value": 3.2,
             "unit": "10*3/uL",
             "system": "http://unitsofmeasure.org",
             "code": "10*3/uL"
           },
-          "specimen": {
-            "reference": "Specimen/jp-specimen-example-2"
-          },
-          "referenceRange": [
+          "high": {
+            "value": 9.8,
+            "unit": "10*3/uL",
+            "system": "http://unitsofmeasure.org",
+            "code": "10*3/uL"
+          }
+        }
+      ]
+    },
+    {
+      "resourceType": "Observation",
+      "id": "inner-observation-labresult-2",
+      "meta": {
+        "profile": [
+          "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
+        ]
+      },
+      "status": "final",
+      "category": [
+        {
+          "coding": [
             {
-              "low": {
-                "value": 3.2,
-                "unit": "10*3/uL",
-                "system": "http://unitsofmeasure.org",
-                "code": "10*3/uL"
-              },
-              "high": {
-                "value": 9.8,
-                "unit": "10*3/uL",
-                "system": "http://unitsofmeasure.org",
-                "code": "10*3/uL"
-              }
+              "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
+              "code": "laboratory"
             }
           ]
-        },
-      {
-        "resourceType": "Observation",
-          "id": "inner-observation-labresult-2",
-          "meta": {
-            "profile": [
-              "http://jpfhir.jp/fhir/core/StructureDefinition/JP_Observation_LabResult"
-            ]
-          },
-          "status": "final",
-          "category": [
-            {
-              "coding": [
-                {
-                  "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_SimpleObservationCategory_CS",
-                  "code": "laboratory"
-                }
-              ]
-            }
-          ],
-          "code": {
+        }
+      ],
+      "code": {
             "coding": [
               {
                 "system": "https://fhir.loinc.org",
@@ -356,56 +359,56 @@ FHIR_JSON = <<~JSON
     ],
     "status": "final",
     "category": [
-        {
-            "coding": [
-                {
-                    "system": "http://loinc.org",
-                    "code": "55429-5",
-                    "display": "血算"
+      {
+        "coding": [
+          {
+            "system": "http://loinc.org",
+            "code": "55429-5",
+            "display": "血算"
                 }
             ]
         }
     ],
     "code": {
-        "coding": [
-            {
-                "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_DocumentCodes_CS",
-                "code": "11502-2",
-                "display": "検体検査報告書"
-            }
-        ]
-    },
-    "subject": {
-        "reference": "Patient/jp-patient-example-1"
-    },
-    "encounter": {
-        "reference": "Encounter/jp-encounter-example-1"
-    },
-    "effectiveDateTime": "2024-08-25T08:30:00+09:00",
-    "issued": "2024-06-06T08:30:00+09:00",
-    "performer": [
+      "coding": [
         {
-            "reference": "Organization/jp-organization-example-hospital",
-            "display": "nagara hospital"
-        }
-    ],
-    "result": [
-      {
-        "reference": "#inner-observation-labresult-1"
-      },
-      {
-        "reference": "#inner-observation-labresult-2"
-      },
-      {
-        "reference": "#inner-observation-labresult-3"
-      },
-      {
-        "reference": "#inner-observation-labresult-4"
-      },
-      {
-        "reference": "#inner-observation-labresult-5"
+          "system": "http://jpfhir.jp/fhir/core/CodeSystem/JP_DocumentCodes_CS",
+          "code": "11502-2",
+        "display": "検体検査報告書"
       }
     ]
+  },
+  "subject": {
+    "reference": "Patient/jp-patient-example-1"
+  },
+  "encounter": {
+    "reference": "Encounter/jp-encounter-example-1"
+  },
+  "effectiveDateTime": "2024-08-25T08:30:00+09:00",
+  "issued": "2024-06-06T08:30:00+09:00",
+  "performer": [
+    {
+      "reference": "Organization/jp-organization-example-hospital",
+      "display": "Nagara hospital"
+    }
+  ],
+  "result": [
+    {
+      "reference": "#inner-observation-labresult-1"
+    },
+    {
+      "reference": "#inner-observation-labresult-2"
+    },
+    {
+      "reference": "#inner-observation-labresult-3"
+    },
+    {
+      "reference": "#inner-observation-labresult-4"
+    },
+    {
+      "reference": "#inner-observation-labresult-5"
+    }
+  ]
 }
 JSON
 
@@ -421,9 +424,9 @@ FLAT_JSON = <<~JSON
     "laboratorytestreport/context/setting|terminology": "openehr",
     "laboratorytestreport/context/_end_time": "2024-06-06T08:30:00+09:00",
     "laboratorytestreport/context/_health_care_facility|name": "Nagara hospital",
-    "laboratorytestreport/laboratory_test_result/any_event:0/test_name": "血算",
-    "laboratorytestreport/laboratory_test_result/any_event:0/test_name/_mapping/target|terminology": "http://loinc.org",
-    "laboratorytestreport/laboratory_test_result/any_event:0/test_name/_mapping/target|code": "55429-5",
+    "laboratorytestreport/laboratory_test_result/any_event:0/test_name": "検体検査報告書",
+    "laboratorytestreport/laboratory_test_result/any_event:0/test_name/_mapping/target|terminology": "http://jpfhir.jp/fhir/core/CodeSystem/JP_DocumentCodes_CS",
+    "laboratorytestreport/laboratory_test_result/any_event:0/test_name/_mapping/target|code": "11502-2",
     "laboratorytestreport/laboratory_test_result/any_event:0/test_name/_mapping|match": "=",
     "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|code": "at0038",
     "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|terminology": "local",
@@ -511,7 +514,7 @@ MML = <<XML
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.medxml.net/MML/v4/ContentModule/test/1.0/testhistory.xsd">
     <mmlLb:information mmlLb:registId="0002228" mmlLb:registTime="2024-06-06T08:30:00+09:00" mmlLb:reportTime="2024-06-06T08:30:00+09:00">
-      <mmlLb:set mmlLb:setCode="55429-5" mmlLb:setCodeId="LOINC">血算</mmlLb:set>
+      <mmlLb:set mmlLb:setCode="11502-2" mmlLb:setCodeId="http://jpfhir.jp/fhir/core/CodeSystem/JP_DocumentCodes_CS">検体検査報告書</mmlLb:set>
       <mmlLb:reportStatus mmlLb:statusCode="final" mmlLb:statusCodeId="mmlLB0001">最終報告</mmlLb:reportStatus>
       <mmlLb:facility mmlLb:facilityCode="JPN432101234567" mmlLb:facilityCodeId="JMARI">Nagara Hospital</mmlLb:facility>
       <mmlLb:client mmlLb:clientCode="facility" mmlLb:clientCodeId="JPN432101234567">87654321</mmlLb:client>
