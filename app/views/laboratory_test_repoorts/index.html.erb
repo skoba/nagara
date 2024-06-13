@@ -2,8 +2,9 @@
 
 <div id="laboratory_test_result">
   <% @laboratory_test_results.each do |laboratory_test_result| %>
-    <% @laboratory_test_result.laboratory_result_analytes.each do |laboratory_result_analyte| %>
+    検査名: <%= laboratory_test_result.test_name %>
+    <% laboratory_test_result.analytes.each do |analyte| %>
+      <%= analyte.name %>: <%= analyte.value %> <%= analyte.unit%>
     <% end %%>
   <% end %>
 </div>
-
