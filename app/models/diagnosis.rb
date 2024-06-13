@@ -110,7 +110,7 @@ class Diagnosis
   class << self
     def all
       url = 'http://localhost:8080/ehrbase/rest/openehr/v1/query/aql'
-      query = { q: "SELECT c FROM EHR e CONTAINS COMPOSITION c WHERE e/ehr_id/value='b3a123d3-86a9-46a9-a8b9-6ac9289abe97'" }
+      query = { q: "SELECT c FROM COMPOSITION c WHERE c/archetype_details/template_id/value='ProblemList'" }
       response = HTTPClient.get(url, query)
       JSON.parse(response.body)['rows'].map do |diagnosis|
         name_value = name_code = name_terminology = onset = diagnostic_certainty = diagnostic_certainty_code = diagnostic_certainty_terminology = nil

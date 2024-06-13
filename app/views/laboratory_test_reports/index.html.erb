@@ -1,0 +1,8 @@
+<h1>検査結果</h1>
+
+<div id="laboratory_test_reports">
+  <% @laboratory_test_reports.each do |laboratory_test_report| %>
+    検査名: <%= laboratory_test_report.test_name %>
+
+  <% end %>
+</div>

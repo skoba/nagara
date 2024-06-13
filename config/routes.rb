@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   resources 'diagnoses'
-  resources 'laboratory_test_results'
+  resources 'laboratory_test_reports'
   # get 'diagnosis/index'
   # get 'diagnosis/show'
 
