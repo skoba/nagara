@@ -3,10 +3,6 @@
 require 'nokogiri'
 require 'fhir_models'
 
-class Analyte
-  attr_accessor :name, :value, :unit
-end
-
 class LaboratoryTestReport
   include ActiveModel::API
   attr_accessor :test_name, :analytes
@@ -14,12 +10,21 @@ class LaboratoryTestReport
   class << self
     def all
       url = 'http://localhost:8080/ehrbase/rest/openehr/v1/query/aql'
-      query = { q: "SELECT c FROM COMPOSITION c WHERE c/archetype_details/template_id/value='LaboratoryTestReport'" }
+      query = { q: "SELECT c FROM COMPOSITION c WHERE c/archetype_details/template_id/value='LaboratoryTestReport.v.1.4.0'" }
       response = HTTPClient.get(url, query)
-      test_name = nil
+      test_name = analytes = nil
       JSON.parse(response.body)['rows'].map do |laboratory_test_report|
         test_name = laboratory_test_report[0]['content'][0]['data']['events'][0]['data']['items'][0]['value']['value']
-        new(test_name:)
+        items = laboratory_test_report[0]['content'][0]['data']['events'][0]['data']['items'].select do |item|
+          item['name']['value'] == 'Laboratory analyte result'
+        end
+        analytes = items.map do |analyte|
+          name = analyte['items'][1]['value']['value']
+          value = analyte['items'][2]['value']['magnitude']
+          unit = analyte['items'][2]['value']['unit']
+          Analyte.new(name:, value:, unit:)
+        end
+        new(test_name:, analytes:)
       end
     end
 
@@ -39,7 +44,6 @@ class LaboratoryTestReport
 
     def from_mml(xml)
       mml = Nokogiri::XML(xml)
-      print mml.xpath('/Mml')
       LaboratoryTestReport.new(
         test_name: mml.xpath('/Mml/MmlBody/MmlModuleItem/docInfo/title').text
       )

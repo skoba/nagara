@@ -2,7 +2,11 @@
 
 <div id="laboratory_test_reports">
   <% @laboratory_test_reports.each do |laboratory_test_report| %>
-    検査名: <%= laboratory_test_report.test_name %>
-
+    <p>
+      <strong>検査名:</strong> <%= laboratory_test_report.test_name %><br/>
+      <% laboratory_test_report.analytes.each do |analyte| %> 
+        <%= analyte.name %>: <%= analyte.value %> <%= analyte.unit%> <br/>
+      <% end %>
+    </p>
   <% end %>
 </div>
