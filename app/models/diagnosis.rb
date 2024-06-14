@@ -10,11 +10,12 @@ class Diagnosis
                 :date_time_clinically_recognised
 
   def save
-    url = 'http://localhost:8080/ehrbase/rest/ecis/v1/composition'
-    params = { format: 'FLAT', templateId: 'ProblemList', ehrId: 'b3a123d3-86a9-46a9-a8b9-6ac9289abe97' }
-    header = { content_type: 'application/json' }
+    ehr_id = 'b6fa57bf-75cf-483f-8cc3-d9e136676a52'
+    params = { format: 'FLAT', ehrId: ehr_id, templateId: 'ProblemList' }
+    header = { 'Content-type' => 'application/json' }
+    url = "http://localhost:8080/ehrbase/rest/openehr/v1/ehr/#{ehr_id}/composition"
     client = HTTPClient.new
-    client.post(url, { query: params, body: flat_json, header: })
+    client.post(url, { query: params, header:, body: flat_json })
   end
 
   def to_fhir
@@ -62,21 +63,21 @@ class Diagnosis
 
   def flat_json
     <<~FLAT
-      {#{' '}
-          "problemlist/category|code": "433",
-          "problemlist/category|terminology": "openehr",
-          "problemlist/category|value": "event",
-          "problemlist/problem_diagnosis/problem_diagnosis_name|terminology": "#{name_terminology}",
-          "problemlist/problem_diagnosis/problem_diagnosis_name|code": "#{name_code}",
-          "problemlist/problem_diagnosis/problem_diagnosis_name|value": "#{name_value}",
-          "problemlist/problem_diagnosis/date_time_of_onset": "#{onset}",
-          "problemlist/problem_diagnosis/date_time_clinically_recognised": "#{date_time_clinically_recognised}",
-          "problemlist/problem_diagnosis/diagnostic_certainty|terminology": "#{diagnostic_certainty_terminology}",
-          "problemlist/problem_diagnosis/diagnostic_certainty|value": "#{diagnostic_certainty}",
-          "problemlist/problem_diagnosis/diagnostic_certainty|code": "#{diagnostic_certainty_code}",
-          "problemlist/territory|terminology": "ISO_3166-1",
-          "problemlist/territory|code": "JP",
-          "problemlist/composer|name": "Shinji KOBAYASHI"
+      {
+        "problemlist/category|code": "433",
+        "problemlist/category|terminology": "openehr",
+        "problemlist/category|value": "event",
+        "problemlist/problem_diagnosis/problem_diagnosis_name|terminology": "#{name_terminology}",
+        "problemlist/problem_diagnosis/problem_diagnosis_name|code": "#{name_code}",
+        "problemlist/problem_diagnosis/problem_diagnosis_name|value": "#{name_value}",
+        "problemlist/problem_diagnosis/date_time_of_onset": "#{onset}",
+        "problemlist/problem_diagnosis/date_time_clinically_recognised": "#{date_time_clinically_recognised}",
+        "problemlist/problem_diagnosis/diagnostic_certainty|terminology": "#{diagnostic_certainty_terminology}",
+        "problemlist/problem_diagnosis/diagnostic_certainty|value": "#{diagnostic_certainty}",
+        "problemlist/problem_diagnosis/diagnostic_certainty|code": "#{diagnostic_certainty_code}",
+        "problemlist/territory|terminology": "ISO_3166-1",
+        "problemlist/territory|code": "JP",
+        "problemlist/composer|name": "Shinji KOBAYASHI"
       }
     FLAT
   end

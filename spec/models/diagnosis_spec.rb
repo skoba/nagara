@@ -1,7 +1,7 @@
 RSpec.describe Diagnosis do
   let(:diagnosis) { build :diagnosis }
-  let(:flat_json) { FLAT_JSON }
-  let(:fhir_json) { FHIR_JSON }
+  let(:flat_json) { FLAT_JSON_PROBLEM }
+  let(:fhir_json) { FHIR_JSON_CONDITION }
 
   describe 'build a valid instance' do
     it 'is valid' do
@@ -39,12 +39,12 @@ RSpec.describe Diagnosis do
 
   describe 'generate FHIR JSON' do
     it 'generate FHIR condition resource equals to FHIR_JSON' do
-      expect(JSON.parse(diagnosis.to_fhir)).to eq JSON.parse(FHIR_JSON)
+      expect(JSON.parse(diagnosis.to_fhir)).to eq JSON.parse(FHIR_JSON_CONDITION)
     end
   end
 
   describe "to parse from MML" do
-    let(:diagnosis_from_mml) { Diagnosis.parse_from_mml(MML) }
+    let(:diagnosis_from_mml) { Diagnosis.parse_from_mml(MMLRD) }
     
     it 'parse MML' do
       expect(diagnosis_from_mml).to be_truthy
@@ -57,12 +57,12 @@ RSpec.describe Diagnosis do
 
   describe 'generate MML' do
     it 's XML is equals MML instance' do
-      expect(diagnosis.to_mml).to eq MML
+      expect(diagnosis.to_mml).to eq MMLRD
     end
   end
 end
 
-FLAT_JSON = <<JSON
+FLAT_JSON_PROBLEM = <<JSON
 {
   "problemlist/category|code": "433",
   "problemlist/category|terminology": "openehr",
@@ -81,7 +81,7 @@ FLAT_JSON = <<JSON
 }
 JSON
 
-FHIR_JSON = <<JSON
+FHIR_JSON_CONDITION = <<JSON
 {
   "resourceType": "Condition",
   "id": "jp-condition-example-1",
@@ -119,7 +119,7 @@ FHIR_JSON = <<JSON
 }
 JSON
 
-MML = <<XML
+MMLRD = <<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <mmlRd:RegisteredDiagnosisModule
   xmlns:mmlRd="http://www.medxml.net/MML/v4/ContentModule/RegisteredDiagnosis/1.0"

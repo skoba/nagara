@@ -9,21 +9,32 @@ RSpec.describe LaboratoryTestReport do
 
   describe 'parser' do
     it 'parse HL7 FHIR json' do
-      expect(LaboratoryTestReport.from_fhir_json(FHIR_JSON).test_name).to eq '検体検査報告書'
+      expect(described_class.from_fhir_json(FHIR_JSON_LABTEST).test_name).to eq '検体検査報告書'
     end
 
     it 'parse FLAT JSON of openEHR' do
-      expect(LaboratoryTestReport.from_flat_json(FLAT_JSON).test_name).to eq '検体検査報告書'
+      expect(described_class.from_flat_json(FLAT_JSON_LABTEST).test_name).to eq '検体検査報告書'
     end
 
     it 'parse MML' do
-      expect(LaboratoryTestReport.from_mml(MML).test_name).to eq '検体検査報告書'
+      expect(described_class.from_mml(MMLLB).test_name).to eq '検体検査報告書'
     end
   end
 
+  describe 'seriarizer' do
+    it 'seriarizes an instance to FLAT JSON' do
+      expect(JSON.parse(laboratory_test_report.to_flat_json)).to eq JSON.parse(FLAT_JSON_LABTEST)
+    end
+  end
+
+  describe 'register to EHRbase' do
+    it 'save data to EHRbase' do
+      expect(laboratory_test_report.save).to be_truthy
+    end
+  end
 end
 
-FHIR_JSON = <<~JSON
+FHIR_JSON_LABTEST = <<~JSON
 {
   "resourceType": "DiagnosticReport",
   "id": "jp-diagnosticreport-labresult-example-1",
@@ -412,7 +423,7 @@ FHIR_JSON = <<~JSON
 }
 JSON
 
-FLAT_JSON = <<~JSON
+FLAT_JSON_LABTEST = <<~JSON
 {
     "laboratorytestreport/category|value": "event",
     "laboratorytestreport/category|terminology": "openehr",
@@ -443,7 +454,7 @@ FLAT_JSON = <<~JSON
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/result_status:0|code": "at0018",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/result_status:0|terminology": "local",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/result_status_time": "2024-06-06T08:30:00+09:00",
-    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/specimen/identifier_value|id": "Specimen/jp-specimen-example-2",
+    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/specimen|id": "Specimen/jp-specimen-example-2",
     "laboratorytestreport/laboratory_test_result/any_event:0/time": "2024-06-06T08:30:00+09:00",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:1/analyte_result_sequence": 2,
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:1/analyte_name": "赤血球数",
@@ -456,7 +467,7 @@ FLAT_JSON = <<~JSON
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:1/result_status:0|terminology": "local",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:1/result_status:0|code": "at0018",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:1/result_status:0|value": "Final",
-    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:1/specimen/identifier_value|id": "Specimen/jp-specimen-example-2",
+    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:1/specimen|id": "Specimen/jp-specimen-example-2",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:2/analyte_result_sequence": 3,
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:2/analyte_name/_mapping/target|terminology": "http://loinc.org",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:2/analyte_name/_mapping/target|code": "718-7",
@@ -468,7 +479,7 @@ FLAT_JSON = <<~JSON
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:2/result_status:0|terminology": "local",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:2/result_status:0|value": "Final",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:2/result_status:0|code": "at0018",
-    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:2/specimen/identifier_value|id": "Specimen/jp-specimen-example-2",
+    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:2/specimen|id": "Specimen/jp-specimen-example-2",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:3/analyte_result_sequence": 4,
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:3/analyte_name": "ヘマトクリット",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:3/analyte_name/_mapping/target|terminology": "http://loinc.org",
@@ -480,7 +491,7 @@ FLAT_JSON = <<~JSON
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:3/result_status:0|terminology": "local",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:3/result_status:0|value": "Final",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:3/result_status:0|code": "at0018",
-    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:3/specimen/identifier_value|id": "Specimen/jp-specimen-example-2",
+    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:3/specimen|id": "Specimen/jp-specimen-example-2",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:4/analyte_result_sequence": 4,
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:4/analyte_name": "血小板数",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:4/analyte_name/_mapping/target|terminology": "http://loinc.org",
@@ -492,7 +503,7 @@ FLAT_JSON = <<~JSON
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:4/result_status:0|terminology": "local",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:4/result_status:0|value": "Final",
     "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:4/result_status:0|code": "at0018",
-    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:4/specimen/identifier_value|id": "Specimen/jp-specimen-example-2",
+    "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:4/specimen|id": "Specimen/jp-specimen-example-2",
     "laboratorytestreport/laboratory_test_result/language|code": "ja",
     "laboratorytestreport/laboratory_test_result/language|terminology": "ISO_639-1",
     "laboratorytestreport/laboratory_test_result/encoding|terminology": "IANA_character-sets",
@@ -505,8 +516,7 @@ FLAT_JSON = <<~JSON
 }
 JSON
 
-
-MML = <<XML
+MMLLB = <<~XML
 <?xml version="1.0" encoding="UTF-8"?>
 <Mml version="4.2.0"
      createDate="2016-12-04T19:41:11"
@@ -523,28 +533,15 @@ MML = <<XML
      xmlns:mmlPsi="http://www.medxml.net/MML/v4/SharedComponent/PersonalizedInfo/1.0"
      xmlns:mmlCi="http://www.medxml.net/MML/v4/SharedComponent/CreatorInfo/1.0"
      xmlns:mmlPi="http://www.medxml.net/MML/v4/ContentModule/PatientInfo/1.0"
-     xmlns:mmlBc="http://www.medxml.net/MML/v4/ContentModule/BaseClinic/1.0"
-     xmlns:mmlFcl="http://www.medxml.net/MML/v4/ContentModule/FirstClinic/1.0"
-     xmlns:mmlHi="http://www.medxml.net/MML/v4/SharedComponent/HealthInsurance/1.0"
-     xmlns:mmlLs="http://www.medxml.net/MML/v4/ContentModule/Lifestyle/1.0"
-     xmlns:mmlPc="http://www.medxml.net/MML/v4/ContentModule/ProgressCourse/1.0"
-     xmlns:mmlRd="http://www.medxml.net/MML/v4/SharedComponent/RegisteredDiagnosis/1.0"
-     xmlns:mmlSg="http://www.medxml.net/MML/v4/ContentModule/Surgery/1.0"
-     xmlns:mmlSm="http://www.medxml.net/MML/v4/ContentModule/Summary/1.0"
-     xmlns:mmlLb="http://www.medxml.net/MML/v4/ContentModule/test/1.0"
-     xmlns:mmlRp="http://www.medxml.net/MML/v4/ContentModule/report/1.0"
-     xmlns:mmlRe="http://www.medxml.net/MML/v4/ContentModule/Referral/1.0"
-     xmlns:mmlSc="http://www.medxml.net/MML/v4/SharedComponent/Security/1.0"
-     xmlns:claim="http://www.medxml.net/claim/claimModule/2.1"
-     xmlns:claimA="http://www.medxml.net/claim/claimAmountModule/2.1">
+     xmlns:mmlLb="http://www.medxml.net/MML/v4/ContentModule/test/1.0">
   <MmlHeader>
     <mmlCi:CreatorInfo>
       <mmlPsi:PersonalizedInfo>
 	      <mmlCm:Id mmlCm:type="facility" mmlCm:tableId="JPN999999900009">11</mmlCm:Id>
 	      <mmlPsi:personName>
 	        <mmlNm:Name mmlNm:repCode="I" mmlNm:tableId="MML0025">
-	          <mmlNm:family>責任者姓</mmlNm:family>
-	          <mmlNm:given>責任者名</mmlNm:given>
+	          <mmlNm:family>姓</mmlNm:family>
+	          <mmlNm:given>名</mmlNm:given>
 	        </mmlNm:Name>
 	      </mmlPsi:personName>
 	      <mmlFc:Facility>
@@ -600,7 +597,7 @@ MML = <<XML
         <mmlLb:TestModule>
           <mmlLb:information mmlLb:registId="0002228" mmlLb:registTime="2024-06-06T08:30:00+09:00" mmlLb:reportTime="2024-06-06T08:30:00+09:00">
             <mmlLb:set>血算</mmlLb:set>
-              <mmlLb:reportStatus mmlLb:statusCode="final" mmlLb:statusCodeId="mmlLB0001">最終報告</mmlLb:reportStatus>
+            <mmlLb:reportStatus mmlLb:statusCode="final" mmlLb:statusCodeId="mmlLB0001">最終報告</mmlLb:reportStatus>
             <mmlLb:facility>Nagara Hospital</mmlLb:facility>
           </mmlLb:information>
           <mmlLb:laboTest>
