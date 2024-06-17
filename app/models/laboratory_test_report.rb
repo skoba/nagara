@@ -38,7 +38,7 @@ class LaboratoryTestReport
         "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|terminology": "local",
         "laboratorytestreport/laboratory_test_result/any_event:0/overall_test_status:0|value": "Final",
         "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/analyte_result_sequence": 1,
-        "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/analyte_name": "白血球数",
+        "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/analyte_name": "#{analytes[0].name}",
         "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/analyte_name/_mapping/target|terminology": "http://loinc.org",
         "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/analyte_name/_mapping/target|code": "26464-8",
         "laboratorytestreport/laboratory_test_result/any_event:0/laboratory_analyte_result:0/analyte_name/_mapping|match": "=",

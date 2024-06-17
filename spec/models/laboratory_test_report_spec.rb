@@ -31,6 +31,8 @@ RSpec.describe LaboratoryTestReport do
     it 'save data to EHRbase' do
       expect(laboratory_test_report.save).to be_truthy
     end
+
+    it 'retireve'
   end
 end
 
